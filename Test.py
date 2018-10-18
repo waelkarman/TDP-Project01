@@ -41,7 +41,10 @@ def main():
     list1.printList()
 
     #copia della lista
-    list2 = list1.copy()
+    try:
+        list2 = list1.copy()
+    except BaseException:
+        print("ERRORE LISTA")
     print("\n(4) La copia della lista è:")
     list2.printList()
 
@@ -52,10 +55,14 @@ def main():
     #verifica dell metodo count
     print("\n(6) Prova di count sulla lista 1, cerchiamo l'elemento 4")
     try:
-    print(list1.count(4))
-    except
+        print(list1.count(4))
+    except BaseException:
+        print("ERRORE LISTA")
     print("\n(6) Prova di count sulla lista 2, cerchiamo l'elemento 4")
-    print(list2.count(4))
+    try:
+        print(list2.count(4))
+    except BaseException:
+        print("ERRORE LISTA")
 
     #verifica dei metodi first,last,before,count,find e after su entrambe le liste
     print('(6) Il primo elemento della lista 1 è:', list1.first().element())
@@ -83,14 +90,20 @@ def main():
     print("\n(7) Stampa della lista 1 prima dell' inversione:\n")
     list1.printList()
     print("(7) Stampa della lista 1 dopo l' inversione:")
-    list1.reverse()
+    try:
+        list1.reverse()
+    except BaseException:
+        print("ERORRE LISTA")
     list1.printList()
 
     #operazione identica sulla lista 2
     print("\n(7) Stampa della lista 2 prima dell' inversione:")
     list2.printList()
     print("\n(7) Stampa della lista 2 dopo l' inversione:")
-    list2.reverse()
+    try:
+        list2.reverse()
+    except BaseException:
+        print("ERRORE LISTA")
     list2.printList()
 
     #verifica dell'ordinamento delle liste
@@ -140,10 +153,16 @@ def main():
     print('(11) applico la merge alle 2 liste ordinate e ottengo:')
 
 
- 
-    merge(sorted1, sorted2).printList()
-
-
+   
+    mergea=merge(sorted1, sorted2).printList
+    third = CircularPositionalList()
+    third.add_first(465)
+    third.add_first(48)
+    third.add_first(13)
+    third.add_first(12)
+    third.add_first(1)
+    print("Verifica merge")
+    merge(sorted1,third).printList()
     #test degli operatori
     print("\n(12) Verifica dell'operatore add")
     new = list1 + list2
@@ -276,20 +295,42 @@ def merge(list1, list2):
             raise TypeError(
                 "L'ogg passato non è istanza della classe corretta")
 
-    l1c = list1.copy()
-    iter2 = iter(list2)
-    temp = l1c.first()
-    while True:
-        try:
-            val = next(iter2)
-        except StopIteration:
-            break
-        while val >= temp.element():
-            temp = l1c._get_next_Position(temp)
-            if temp == l1c.first():
-                break
-        l1c.add_before(temp, val)
-    return l1c
+    if list1.last().element() >= list2.first().element():
+        return list1+list2
+
+    if list2.last().element() >= list1.first().element():
+        return list2+list1
+
+    third = list1.copy()
+    i1 = list1.first()
+    i2 = list2.first()
+
+    cond = True
+    while cond:
+        if i1.element() <= i2.element():    
+            third.add_last(i1.element())
+            #print('l elemento è i1',i1.element())
+            i1 = list1._get_next_Position(i1)
+        if i1.element() >= i2.element():
+            third.add_last(i2.element())
+            #print('l elemento è i2', i2.element())
+            i2 = list2._get_next_Position(i2)
+        
+        if i1 == list1.last() or i2 == list2.last():
+            cond = False
+
+    #print('ok')
+    if i1 == list1.last():
+        while i2 != list2.first():
+            third.add_last(i2.element())
+            i2 = list2._get_next_Position(i2)
+
+    if i2 == list2.last():
+        while i1 != list1.first():
+            third.add_last(i1.element())
+            i1 = list1._get_next_Position(i1)
+
+    return third    
 
 
 

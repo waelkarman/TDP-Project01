@@ -392,28 +392,8 @@ class CircularPositionalList(PositionalList):
             print("Postion non valida")
         return temp
 
-"""
-    da provare se è possibile 
-    def _get_head(self):      # utility
-        return self._header
-    def _get_tail(self):
-        return self._trailer
-    def _set_head(self,new):
-        self._header=new
-    def _set_tail(self,new):
-        self._header=new
 
 
-    def reverseO1(self):
-        head = _get_head()
-        tail = _get_tail()
-        self._set_head(tail)
-        self._set_head(head)
-        self._set_node_next(self._get_head(),self.last())
-        self._set_node_prev(self._get_head(),None)
-        self._set_node_next(self._get_tail(),None)
-        self._set_node_prev(self._get_tail(),self.first())                                                                            
-"""
 
 
 
