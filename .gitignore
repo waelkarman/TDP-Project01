@@ -1,0 +1,5 @@
+.vscode/launch.json
+.vscode/settings.json
+__pycache__/circularPositionalList.cpython-37.pyc
+__pycache__/example.cpython-37.pyc
+__pycache__/scoreBoard.cpython-37.pyc

@@ -8,7 +8,7 @@ from TdP_collections.list.positional_list import PositionalList
 #              \/     \/      \/                 
 
 
-class CircularPositionList(PositionalList):
+class CircularPositionalList(PositionalList):
 
     def __init__(self):
         super().__init__()
@@ -216,7 +216,7 @@ class CircularPositionList(PositionalList):
     # NOTE: uso del metodo len aggiunta dell iteratore, gestire ecc nel test
     # STATO: OK
     def copy(self):
-        copy = CircularPositionList()
+        copy = CircularPositionalList()
         if len(self) == 0:
             raise ValueError("La lista è vuota") 
         else:
@@ -394,7 +394,7 @@ class CircularPositionList(PositionalList):
 
 """
     da provare se è possibile 
-    def _get_head(self):      # utility nel caso in cui vogliamo fare la reverse in O(1) come ha detto il fosso di Diodato 
+    def _get_head(self):      # utility
         return self._header
     def _get_tail(self):
         return self._trailer
