@@ -79,7 +79,6 @@ class ScoreBoard():
     # DESCRIZIONE: Inserisce un nuovo Score nello ScoreBoard se e solo se non è peggiore dei risultati correntemente salvati. Non incrementa la dimensione dello Scoreboard
     # NOTE: DA RIFARE EVENTUALMENTE 
     # STATO:--
-
     def insert(self, s):  # controllare che uno score sia effettivamente uno score
         if self.Is_empty() == True:  # se la lista è vuota inserisco normalmente
             self._scoreBoard.add_last(s)  # inserimento in coda
