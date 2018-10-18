@@ -150,19 +150,22 @@ def main():
     sorted2.printList()
 
 
-    print('(11) applico la merge alle 2 liste ordinate e ottengo:')
+    print('\n(11) applico la merge alle 2 liste ordinate e ottengo:')
+    mergea = merge(sorted1, sorted2)
+    mergea.printList()
 
-
-   
-    mergea=merge(sorted1, sorted2).printList
+    print('\n(11) Creo una terza lista: ')
     third = CircularPositionalList()
     third.add_first(465)
     third.add_first(48)
     third.add_first(13)
     third.add_first(12)
     third.add_first(1)
-    print("Verifica merge")
-    merge(sorted1,third).printList()
+    third.printList()
+    print("\n(11) applico la merge con il risultato della merge precedente:")
+    merge(third,mergea).printList()
+
+
     #test degli operatori
     print("\n(12) Verifica dell'operatore add")
     new = list1 + list2
@@ -295,41 +298,34 @@ def merge(list1, list2):
             raise TypeError(
                 "L'ogg passato non è istanza della classe corretta")
 
-    if list1.last().element() >= list2.first().element():
-        return list1+list2
-
-    if list2.last().element() >= list1.first().element():
-        return list2+list1
-
-    third = list1.copy()
+    third = CircularPositionalList()
     i1 = list1.first()
     i2 = list2.first()
+    j1 = len(list1)
+    j2 = len(list2)
 
-    cond = True
-    while cond:
+    while True:
         if i1.element() <= i2.element():    
             third.add_last(i1.element())
-            #print('l elemento è i1',i1.element())
             i1 = list1._get_next_Position(i1)
+            j1-=1
         if i1.element() >= i2.element():
             third.add_last(i2.element())
-            #print('l elemento è i2', i2.element())
             i2 = list2._get_next_Position(i2)
-        
-        if i1 == list1.last() or i2 == list2.last():
-            cond = False
+            j2-=1
+        if j1 == 0 or j2 == 0:
+            break
 
-    #print('ok')
-    if i1 == list1.last():
-        while i2 != list2.first():
+    if j1 == 0:
+        while j2 != 0:
             third.add_last(i2.element())
             i2 = list2._get_next_Position(i2)
-
-    if i2 == list2.last():
-        while i1 != list1.first():
+            j2-=1
+    if j2 == 0:
+        while j1 != 0:
             third.add_last(i1.element())
             i1 = list1._get_next_Position(i1)
-
+            j1-=1
     return third    
 
 
