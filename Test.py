@@ -12,8 +12,8 @@ from scoreBoard import ScoreBoard
 def main():
     print('INIZIO DEL TESTING : CIRCULAR POSITIONAL LIST \n')
     print('(1) Creo la lista')
-    list1 = CircularPositionalList()  # creazione della lista
-    if list1.Is_empty() == True:  # verifica che la lista sia vuota
+    list1 = CircularPositionalList()                                        # creazione della lista
+    if list1.Is_empty() == True:                                            # verifica che la lista sia vuota
         print("(2) La lista è vuota")
     else:
         print("(2) La lista non è vuota")
@@ -27,15 +27,15 @@ def main():
     list1.add_last(3)
     list1.add_before(a, 25)
     list1.add_after(b, 15)
-    print("(3) Stampa della lista \n")
+    print("(3) Stampa della lista ")
     list1.printList()
-    print("(3) Rimpiazzo l' elemento 2 con l' elemento 78\n")
+    print("\n(3) Rimpiazzo l' elemento 2 con l' elemento 78\n")
 
-    #verifica funzioni replace e delete
-    old = list1.replace(b, 78)
-    print("(3) La nuova lista è \n")
+    
+    old = list1.replace(b, 78)                                              # verifica del metodo replace
+    print("(3) La nuova lista è ")
     list1.printList()
-    print("(3) L'elemento rimpiazzato è : ", old)
+    print("\n(3) L'elemento rimpiazzato è : ", old)
     print("\n(3) Cancellazione dell'elemento 78")
     print("(3) L' elemento cancellato è", list1.delete(b), "La nuova lista è :")
     list1.printList()
@@ -49,47 +49,48 @@ def main():
     list2.printList()
 
     #verifica che entrambe le liste non siano vuote
-    print('(5) La lista 1 è vuota?', list1.is_empty())
+    print('\n(5) La lista 1 è vuota?', list1.is_empty())
     print('(5) La lista 2 è vuota?', list2.is_empty())
 
-    #verifica dell metodo count
+    #verifica del metodo count
     print("\n(6) Prova di count sulla lista 1, cerchiamo l'elemento 4")
     try:
-        print(list1.count(4))
+        print("L'elemento 4 ha ",list1.count(4), "occorrenze nella lista" )
     except BaseException:
         print("ERRORE LISTA")
     print("\n(6) Prova di count sulla lista 2, cerchiamo l'elemento 4")
     try:
-        print(list2.count(4))
+        print("L'elemento 4 ha ",list2.count(4), "occorrenze nella lista")
     except BaseException:
         print("ERRORE LISTA")
 
     #verifica dei metodi first,last,before,count,find e after su entrambe le liste
-    print('(6) Il primo elemento della lista 1 è:', list1.first().element())
+    print('\n(6) Il primo elemento della lista 1 è:', list1.first().element())
     print('(6) Il primo elemento della lista 2 è:', list2.first().element())
 
-    print("(6) L' elemento successivo al primo della lista 1 è :",
+    print("\n(6) L' elemento successivo al primo della lista 1 è :",
         list1.after(list1.first()))
     print("(6) L' elemento successivo al primo della lista 2 è :",
         list2.after(list2.first()))
 
-    print("(6) L' ultimo elemento della lista 1 è:", list1.last().element())
+    print("\n(6) L' ultimo elemento della lista 1 è:", list1.last().element())
     print("(6) L' ultimo elemento della lista 2 è:", list2.last().element())
 
-    print("(6) L elemento precedente all ultimo della lista 1 è :",
+    print("\n(6) L elemento precedente all ultimo della lista 1 è :",
         list1.before(list1.last()))
     print("(6) L elemento precedente all ultimo della lista 2 è :",
         list2.before(list2.last()))
 
     #testing della find
     try:
-        print("(6) Cerco l' elemento 4 e la find mi restituisce la position il cui elemento è:", list1.find(4).element() )
+        print("\n(6) Cerco l' elemento 4 e la find mi restituisce la position il cui elemento è:", list1.find(4).element() )
     except BaseException:
         print("ERRORE LISTA")
+
     #verifica della funzione reverse su entrambe le liste
-    print("\n(7) Stampa della lista 1 prima dell' inversione:\n")
+    print("\n(7) Stampa della lista 1 prima dell' inversione:")
     list1.printList()
-    print("(7) Stampa della lista 1 dopo l' inversione:")
+    print("\n(7) Stampa della lista 1 dopo l' inversione:")
     try:
         list1.reverse()
     except BaseException:
@@ -118,7 +119,7 @@ def main():
     print("\n")
 
 
-    #ordinamento delle 2 liste
+    # ordinamento delle 2 liste
     # creazione di due liste in cui salvare gli elementi ordinati
     sorted1 = CircularPositionalList()
     sorted2 = CircularPositionalList()
@@ -126,7 +127,7 @@ def main():
     print('(9) Ordinamento della lista 1 tramite bubble')
     iter_a = list1.bubblesorted()  # iteratore per lista1
 
-    #for di ordinamento
+    # for di ordinamento
     i = 0
     for e in iter_a:
         print("Elemento", i, ":", e)
@@ -143,7 +144,7 @@ def main():
         i += 1
 
     print('\n(10) Creo due liste ordinate ricavate dalle 2 di partenza:')
-    print('\n(10) sorted1:')
+    print('(10) sorted1:')
     sorted1.printList()
 
     print('\n(10) sorted2:')
@@ -174,15 +175,15 @@ def main():
     print("\n(12) Verifica dell'operatore contain")
     print('(12) Salvo il riferimento all elemento 3 e lo cancello')
     try:
-        save = list1.find(3)  # salvo la position dell'elemento 3
+        save = list1.find(3)                                       # salvo la position dell'elemento 3
     except BaseException:
         print("ERRORE LISTA")
-    list1.delete(save)  # cancello la position di 3
+    list1.delete(save)                                             # cancello la position di 3
     print('(12) L elemento 3 è contenuto nella lista ? ',
-        save.element() in list1)  # controllo se 3 è contenuto
+        save.element() in list1)                                   # controllo se 3 è contenuto
     try:    
         print('(12) L elemento 5 è contenuto nella lista ? ', list1.find(
-        5).element() in list1)  # controllo se 5 è contenuto
+        5).element() in list1)                                     # controllo se 5 è contenuto
     except BaseException:
         print("ERRORE LISTA")
 
@@ -194,10 +195,10 @@ def main():
     print("\n")
     list1.printList()
 
-    print("\nV(12) erifica dell'operatore set_item impostando 100 come primo valore")
+    print("\n(12) Verifica dell'operatore set_item impostando 100 come primo valore")
     list1[list1.first()] = 100
     list1.printList()
-    list1[save] = 99  # prova di set_item in caso venga inserita una position non valida    DA DECOMMENTARE PER IL TESTING
+    list1[save] = 99                                                # prova di set_item in caso venga inserita una position non valida    DA DECOMMENTARE PER IL TESTING
 
     print("\n(12) Verifica dell'operatore delete_item")
     print("(12) Cancellazione del primo elemento della lista")
@@ -211,22 +212,26 @@ def main():
     #---------------------------------------------------------------(')>
     #--------------------------------->> TESTING SCOREBOARD <<------(_)
     #---------------------------------------------------------------""
-
+    
+        
     print("\n\nINIZIO DEL TESTING : SCOREBOARD")
     print("(13) Creo lo score Board e lo riempio con valori casuali :")
+    
+    #creazione dello scoreboard e di 11 score            
     s=ScoreBoard()
     score1 = s.Score("Michele",250,"1995")
     score2 = s.Score("Vittorio",251,"1990")
     score3 = s.Score("Wael",300,"1969")
     score4 = s.Score("Vincenzo",500,"1956")
     score5 = s.Score("Alessandro",10,"1999")
-    score6 = s.Score("Auletta",3,"99")
-    score7 = s.Score("Diodato",10,"1499")
-    score8 = s.Score("Foggia",40,"1399")
-    score9 = s.Score("Marcelli",30000,"1299")
+    score6 = s.Score("Alessio",3,"99")
+    score7 = s.Score("Giovanni",10,"1499")
+    score8 = s.Score("Lorenzo",40,"1399")
+    score9 = s.Score("Angelo",30000,"1299")
     score10 = s.Score("Gennaro",1,"1199")
     score11 = s.Score("Giulio",3,"1090")
 
+    #inserimento degli scores nello scoreboard
     s.insert(score1)
     s.insert(score2)
     s.insert(score3)
@@ -261,10 +266,10 @@ def main():
     score3 = s2.Score("Wael",300,"1969")
     score4 = s2.Score("Vincenzo",500,"1956")
     score5 = s2.Score("Alessandro",10,"1999")
-    score6 = s2.Score("Auletta",3,"99")
-    score7 = s2.Score("Diodato",10,"1499")
-    score8 = s2.Score("Foggia",40,"1399")
-    score9 = s2.Score("Marcelli",30000,"1299")
+    score6 = s2.Score("Roberta",3,"99")
+    score7 = s2.Score("Roberto",10,"1499")
+    score8 = s2.Score("Susanna",40,"1399")
+    score9 = s2.Score("Angelo",30000,"1299")
     score10 = s2.Score("Gennaro",1,"1199")
     score11 = s2.Score("Giulio",3,"1090")
 
@@ -288,7 +293,16 @@ def main():
         print("Elemento", i, ":", e.value())
         i += 1
 
-
+    print("\n(16) Cancelliamo tutte le liste utilizzate")  #list1,sorted1,sorted2,third
+    list1.clear()
+    sorted1.clear()
+    sorted2.clear()
+    third.clear()
+    print('(16) Stampa della liste vuote: ')
+    list1.printList()
+    sorted1.printList()
+    sorted2.printList()
+    third.printList()
 
 def merge(list1, list2):
     if not isinstance(list1, CircularPositionalList):
@@ -307,11 +321,11 @@ def merge(list1, list2):
     while True:
         if i1.element() <= i2.element():    
             third.add_last(i1.element())
-            i1 = list1._get_next_Position(i1)
+            i1 = list1.get_next_Position(i1)
             j1-=1
         if i1.element() >= i2.element():
             third.add_last(i2.element())
-            i2 = list2._get_next_Position(i2)
+            i2 = list2.get_next_Position(i2)
             j2-=1
         if j1 == 0 or j2 == 0:
             break
@@ -319,12 +333,12 @@ def merge(list1, list2):
     if j1 == 0:
         while j2 != 0:
             third.add_last(i2.element())
-            i2 = list2._get_next_Position(i2)
+            i2 = list2.get_next_Position(i2)
             j2-=1
     if j2 == 0:
         while j1 != 0:
             third.add_last(i1.element())
-            i1 = list1._get_next_Position(i1)
+            i1 = list1.get_next_Position(i1)
             j1-=1
     return third    
 
