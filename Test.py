@@ -247,16 +247,23 @@ def main():
 
     print("\n(14) Stampo i 5 migliori risultati:")
     i=0
-    for e in s.top(5):
-        print("Elemento", i, ":", e.name(), '-', e.value())
-        i+=1
+    try:
+        for e in s.top(5):
+            print("Elemento", i, ":", e.name(), '-', e.value())
+            i+=1
+    except TypeError:
+        print("Indice non valido")   
 
     print("\n(14) Stampo i 5 peggiori risultati:")
     h = 0
-    for e in s.last(5):
-        print("Elemento", h, ":", e.name(), '-', e.value())
-        h += 1
-
+    try:
+        for e in s.last(5):
+            print("Elemento", h, ":", e.name(), '-', e.value())
+            h += 1
+    except TypeError:
+            print("Indice non valido")        
+                    
+        
 
 
     print('\n(15) Creo un nuovo scoreboard con gli stessi valori del primo al solo scopo di testare la merge:')
@@ -286,8 +293,12 @@ def main():
     s2.insert(score10)
     s2.insert(score11)
 
-    s.merge(s2) 
-
+    
+    try:
+        s.merge(s2) 
+    except TypeError:
+        print("Parametro passato al metodo scorretto")
+    
     print('\n(15) Stampa dello scoreboard dopo la merge:')
     i = 0
     for e in s.top(10):
@@ -351,4 +362,4 @@ def merge(list1, list2):
 
 if __name__ == "__main__":
     main()
-    input("press enter to continue...")
+    input("Press ENTER to continue...")

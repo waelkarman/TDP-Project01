@@ -118,6 +118,9 @@ class ScoreBoard():
     # DESCRIZIONE: Restituisce i migliori i score nello ScoreBoard
     # NOTE:
     def top(self, i=1): 
+        if i < 0:
+            raise TypeError
+                                
         j = 0
         for e in self._scoreBoard:
             if(i == 0):
@@ -130,6 +133,8 @@ class ScoreBoard():
     # DESCRIZIONE: Restituisce i peggiori i score nello ScoreBoard
     # NOTE: --
     def last(self, i=1):
+        if i < 0:
+            raise TypeError
         j = 0
         temp = self._scoreBoard.copy()              
         temp.reverse()
@@ -144,6 +149,10 @@ class ScoreBoard():
     # DESCRIZIONE: Fonde lo ScoreBoard corrente con new selezionando i 10 migliori risultati
     # NOTE:
     def merge(self,list):
+        if not isinstance(list, ScoreBoard):
+            raise TypeError
         for i in list._scoreBoard:
             self.insert(i)
+
+            
     
