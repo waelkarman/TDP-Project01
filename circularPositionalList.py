@@ -67,9 +67,10 @@ class CircularPositionalList(PositionalList):
 
     # DESCRIZIONE: Inserisce l' elemento "e" in testa alla lista e restituisce la position del nuovo elemento
     # NOTE:  --
-    def add_first(self,e):
-        if len(self) == 0:               
-            temp = super().add_first(e)
+    def add_first(self,e):        
+
+        if len(self) == 0:                             
+            temp = super().add_first(e)              # Istruzioni per rendere la coda circolare 
             temp._node._prev = temp._node
             temp._node._next = temp._node
         else:                                                                   
@@ -80,7 +81,8 @@ class CircularPositionalList(PositionalList):
 
     # DESCRIZIONE: Inserisce l elemento "e" in coda alla lista e restituisce la position del nuovo elemento
     # NOTE: --
-    def add_last(self,e):                                                       
+    def add_last(self,e):   
+        
         if len(self) == 0:                                                      
             temp = self.add_first(e)
         else:
@@ -95,7 +97,8 @@ class CircularPositionalList(PositionalList):
         try:
             node=self._validate(p)     
         except BaseException: 
-            print ("Position non valida")                                          
+            print("Position non valida")   
+                   
         if p == self.first():
             temp = self.add_last(e)
         else:
@@ -109,6 +112,7 @@ class CircularPositionalList(PositionalList):
             node=self._validate(p)  
         except BaseException:
             print("Position non valida")
+        
 
         if p == self.last():
             temp = self.add_first(e)
@@ -119,6 +123,7 @@ class CircularPositionalList(PositionalList):
     # DESCRIZIONE: Restituisce una position contenente la prima occorrenza dell' elemento "e" nella lista o NONE se "e" non è presente
     # NOTE: --
     def find(self, e):
+        
         j = len(self)
         if j == 0:
             raise ValueError('La lista è vuota')                                        
@@ -134,6 +139,7 @@ class CircularPositionalList(PositionalList):
     # DESCRIZIONE: Sostituisce l' elemento in position p con "e" e restituisce il vecchio valore
     # NOTE: --
     def replace(self,p,e):
+        
         old_value = p.element()
         try:
             super().replace(p,e)
@@ -149,8 +155,8 @@ class CircularPositionalList(PositionalList):
             node = self._validate(p)
         except BaseException:
             print ("Position non valida")
-        if node == self._trailer._prev:
-            self._trailer._prev = node._prev
+        if node == self._trailer._prev:              # istruzioni per conservare la circolarità della lista in caso di cancellazione del primo 
+            self._trailer._prev = node._prev         # o dell'ultimo elemento
         if node == self._header._next:
             self._header._next = node._next
         return super().delete(p)
@@ -170,6 +176,8 @@ class CircularPositionalList(PositionalList):
     # DESCRIZIONE:Restituisce il numero di occorrenze di "e" nella lista 
     # NOTE: --
     def count(self,e):
+
+       
         j = len(self)
         count = 0
         if j == 0:
@@ -178,10 +186,14 @@ class CircularPositionalList(PositionalList):
             for temp in self:
                 if(temp == e):
                     count+=1
+        
+        if count == 0:
+            return print("L'elemento non è presente nella lista")
+        
         return count
 
-    # DESCRIZIONE: Inverte l'ordine degli elementi nela lista
-    # NOTE: --
+    # DESCRIZIONE: Inverte l'ordine degli elementi nella lista
+    # NOTE: Reverse effettuata senza utilizzo di una copia della lista
     def reverse(self):                                                               
         j = len(self)                                                                
         if j==0:                                                                     
@@ -299,14 +311,14 @@ class CircularPositionalList(PositionalList):
         n = len(self)
         copyed = self.copy()
         walk = copyed.first()
-        for i in range(n):                   
-            for j in range(0, n-i-1):
+        for i in range(n):                                                         # implementazione algoritmo d'ordinamento bubblesort
+            for j in range(0, n-i-1):                                        
                 if copyed[walk] > copyed[copyed.get_next_Position(walk)] :
                     temp = copyed[walk]
-                    copyed[walk] = copyed[copyed.get_next_Position(walk)]
+                    copyed[walk] = copyed[copyed.get_next_Position(walk)]          # istruzioni per scambiare gli elementi in caso il corrente sia maggiore del successivo
                     copyed[copyed.get_next_Position(walk)] =  temp
                 walk = copyed.get_next_Position(walk)
-            walk = copyed.first()
+            walk = copyed.first()                                                  # aggiornamento della position 
         
         for e in copyed:
             yield e
@@ -340,7 +352,7 @@ class CircularPositionalList(PositionalList):
 #--------------------------------->> DEFINIZIONE UTILITY <<-----(_)
 #---------------------------------------------------------------""
 
-    # DESCRIZIONE: Restituisce la Position dopo p
+    # DESCRIZIONE: Restituisce la Position successiva a p
     # NOTE: --
     def get_next_Position(self,p): 
         try:
@@ -349,7 +361,7 @@ class CircularPositionalList(PositionalList):
             print("Position non valida")           
         return temp
 
-    # DESCRIZIONE: Restituisce la Position prima di p
+    # DESCRIZIONE: Restituisce la Position precedente a p
     # NOTE: --
     def get_prev_Position(self,p):
         try: 
@@ -358,8 +370,12 @@ class CircularPositionalList(PositionalList):
             print("Postion non valida")
         return temp
 
+    
 
 
+
+        
+       
 
 
 

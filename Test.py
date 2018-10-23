@@ -198,7 +198,8 @@ def main():
     print("\n(12) Verifica dell'operatore set_item impostando 100 come primo valore")
     list1[list1.first()] = 100
     list1.printList()
-    list1[save] = 99                                                # prova di set_item in caso venga inserita una position non valida    DA DECOMMENTARE PER IL TESTING
+    print("\nVerifica di set_item impostando l'elemento di una position cancellata in precedenza dalla lista")
+    list1[save] = 99                                                # prova di set_item in caso venga inserita una position non valida    
 
     print("\n(12) Verifica dell'operatore delete_item")
     print("(12) Cancellazione del primo elemento della lista")
@@ -247,18 +248,18 @@ def main():
     print("\n(14) Stampo i 5 migliori risultati:")
     i=0
     for e in s.top(5):
-        print("Elemento", i, ":", e.value())
+        print("Elemento", i, ":", e.name(), '-', e.value())
         i+=1
 
     print("\n(14) Stampo i 5 peggiori risultati:")
     h = 0
     for e in s.last(5):
-        print("Elemento", h, ":", e.value())
+        print("Elemento", h, ":", e.name(), '-', e.value())
         h += 1
 
 
 
-    print('\n(15) Creo un nuovo scoreboard uguale al primo al solo scopo di testare la merge:')
+    print('\n(15) Creo un nuovo scoreboard con gli stessi valori del primo al solo scopo di testare la merge:')
 
     s2 = ScoreBoard()
     score1 = s2.Score("Michele",250,"1995")
@@ -287,10 +288,10 @@ def main():
 
     s.merge(s2) 
 
-    print('\n(15) Stampa della lista dopo la merge:')
+    print('\n(15) Stampa dello scoreboard dopo la merge:')
     i = 0
     for e in s.top(10):
-        print("Elemento", i, ":", e.value())
+        print("Elemento", i, ":",e.name(),'-',e.value())
         i += 1
 
     print("\n(16) Cancelliamo tutte le liste utilizzate")  #list1,sorted1,sorted2,third
@@ -304,41 +305,45 @@ def main():
     sorted2.printList()
     third.printList()
 
-def merge(list1, list2):
+
+# DESCRIZIONE: prende due liste ordinate e le fonde in una nuova lista ordinata contentente gli elementi di entrambe
+def merge(list1, list2): 
     if not isinstance(list1, CircularPositionalList):
             raise TypeError(
-                "L'ogg passato non è istanza della classe corretta")
+                "L'oggetto passato non è istanza della classe corretta")
     if not isinstance(list2, CircularPositionalList):
             raise TypeError(
-                "L'ogg passato non è istanza della classe corretta")
+                "L'oggetto passato non è istanza della classe corretta")
 
     third = CircularPositionalList()
-    i1 = list1.first()
-    i2 = list2.first()
+    p1 = list1.first()
+    p2 = list2.first()
     j1 = len(list1)
     j2 = len(list2)
 
-    while True:
-        if i1.element() <= i2.element():    
-            third.add_last(i1.element())
-            i1 = list1.get_next_Position(i1)
+    while True:                                        # confronta gli elementi delle due liste e li inserisce nella nuova lista
+        if p1.element() <= p2.element():    
+            third.add_last(p1.element())
+            p1 = list1.get_next_Position(p1)
             j1-=1
-        if i1.element() >= i2.element():
-            third.add_last(i2.element())
-            i2 = list2.get_next_Position(i2)
+        if p1.element() >= p2.element():
+            third.add_last(p2.element())
+            p2 = list2.get_next_Position(p2)
             j2-=1
         if j1 == 0 or j2 == 0:
             break
 
-    if j1 == 0:
+    # nel caso in cui rimangono degli elementi non inseriti in una delle due liste, essi vengono aggiunti in coda alla nuova lista
+    
+    if j1 == 0:                                       
         while j2 != 0:
-            third.add_last(i2.element())
-            i2 = list2.get_next_Position(i2)
+            third.add_last(p2.element())
+            p2 = list2.get_next_Position(p2)
             j2-=1
     if j2 == 0:
         while j1 != 0:
-            third.add_last(i1.element())
-            i1 = list1.get_next_Position(i1)
+            third.add_last(p1.element())
+            p1 = list1.get_next_Position(p1)
             j1-=1
     return third    
 
@@ -346,3 +351,4 @@ def merge(list1, list2):
 
 if __name__ == "__main__":
     main()
+    input("press enter to continue...")

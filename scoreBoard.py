@@ -63,21 +63,21 @@ class ScoreBoard():
         return self._size
 
     # DESCRIZIONE: Restituisce True se non ci sono Score nello ScoreBoard e False altrimenti
-    # NOTE:
+    # NOTE: -- 
     def Is_empty(self):
         return self._scoreBoard.Is_empty()
 
     # DESCRIZIONE: Inserisce un nuovo Score nello ScoreBoard se e solo se non è peggiore dei risultati correntemente salvati. Non incrementa la dimensione dello Scoreboard
-    # NOTE: DA RIFARE EVENTUALMENTE 
+    # NOTE: Lo scoreboard è implementato in modo che l'elemento con lo score più grande si trova in testa e il più piccolo in coda
     def insert(self, s):  
-        if self.Is_empty() == True: 
+        if self.Is_empty() == True:                                 # se lo score board è vuoto si inserisce lo score 
             self._scoreBoard.add_last(s)  
-        elif self._size == len(self._scoreBoard):
-            if s.value() > self._scoreBoard.last().element().value():  
-                self._scoreBoard.delete(self._scoreBoard.last())
+        elif self._size == len(self._scoreBoard):                             #se lo scoreboard è pieno :
+            if s.value() > self._scoreBoard.last().element().value():          # verifica se l' elemento da inserire è migliore del peggiore presente nello scoreboard, altrimenti non inserire 
+                self._scoreBoard.delete(self._scoreBoard.last())               # nel caso bisogna inserire si inserisce al posto dell ultimo, e successivamente si effettuano gli swap fino a piazzare lo score nella posizione corretta 
                 self._scoreBoard.add_last(s)
                 temp = self._scoreBoard.last()
-                while temp.element().value() > self._scoreBoard.before(temp).value():
+                while temp.element().value() > self._scoreBoard.before(temp).value():   
                     save = self._scoreBoard.get_prev_Position(
                         temp)  
                     elemtemp = temp.element()
@@ -87,8 +87,8 @@ class ScoreBoard():
                     if temp == self._scoreBoard.first():
                         break
 
-        elif self._size > len(self._scoreBoard):
-            if s.value() > self._scoreBoard.last().element().value():
+        elif self._size > len(self._scoreBoard):                                # Se lo scoreboard non è pieno, verifica se il valore da inserire è migliore del peggior valore presente nello scoreboard.
+            if s.value() > self._scoreBoard.last().element().value():           # In caso positivo, inserisci in coda e procedi con degli swap per piazzare lo score nella posizione giusta 
                 self._scoreBoard.add_last(s)
                 temp = self._scoreBoard.last()
                 while temp.element().value() > self._scoreBoard.before(temp).value():
@@ -100,7 +100,7 @@ class ScoreBoard():
                     if temp == self._scoreBoard.first():
                         break
             else:
-                self._scoreBoard.add_last(s)
+                self._scoreBoard.add_last(s)                                    # se lo score non è pieno ma l elemento inserito è peggiore dell ultimo elemento presente, inserisci semplicemente in coda
 
     # DESCRIZIONE: Stampa N elementi dello ScoreBoard circolarmente
     # NOTE:--
